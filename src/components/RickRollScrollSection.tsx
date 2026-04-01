@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
-import { useScroll, useSpring, motion, AnimatePresence, useMotionValueEvent } from 'framer-motion';
+import { useScroll, useSpring, useTransform, motion, AnimatePresence, useMotionValueEvent } from 'framer-motion';
 
 export default function RickRollScrollSection() {
   const [isStarted, setIsStarted] = useState(false);
@@ -22,6 +22,8 @@ export default function RickRollScrollSection() {
     target: containerRef,
     offset: ['start start', 'end end']
   });
+
+  const scrollPromptOpacity = useTransform(scrollYProgress, [0, 0.02], [1, 0]);
 
   // Limit framing scroll speed using a spring damper so it physically can't "skip" too fast
   const smoothProgress = useSpring(scrollYProgress, {
@@ -136,7 +138,7 @@ export default function RickRollScrollSection() {
     if (isStarted) {
       const timer = setTimeout(() => {
         setShowPopup(true);
-      }, 5000);
+      }, 3000);
       return () => clearTimeout(timer);
     }
   }, [isStarted]);
@@ -200,7 +202,7 @@ export default function RickRollScrollSection() {
                 &times;
               </button>
               <h3 className='text-2xl font-bold mb-2 tracking-tight'>April Fools!</h3>
-              <p className='text-lg text-gray-600 mb-6'>Thank you for wasting 5 seconds of your life on this! Here's a gift for you.</p>
+              <p className='text-lg text-gray-600 mb-6'>Thank you for wasting 3 seconds of your life on this! Here's a gift for you.</p>
               <a
                 href='https://links.tngdigital.com.my/moneypacket/9f7lUikzO6Hcj71Ubgni'
                 target='_blank'
@@ -218,6 +220,22 @@ export default function RickRollScrollSection() {
         <div className='sticky top-0 w-full h-screen overflow-hidden flex items-center justify-center pointer-events-none'>
           {/* Framer motion doesn't control the canvas directly, we just read the scroll from the parent */}
           <canvas ref={canvasRef} className='w-full h-full object-cover bg-black' />
+          
+          {/* Scroll Prompt */}
+          <AnimatePresence>
+            {isStarted && (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5, duration: 1 }}
+                style={{ opacity: scrollPromptOpacity }}
+                className='absolute bottom-16 text-white/80 font-semibold text-2xl tracking-widest uppercase flex flex-col items-center gap-2 drop-shadow-lg'
+              >
+                <span>Scroll</span>
+                <span className='animate-bounce font-bold'>↓</span>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </div>
     </div>
