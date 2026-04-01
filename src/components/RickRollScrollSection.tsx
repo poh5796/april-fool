@@ -204,7 +204,7 @@ export default function RickRollScrollSection() {
               <h3 className='text-2xl font-bold mb-2 tracking-tight'>April Fools!</h3>
               <p className='text-lg text-gray-600 mb-6'>Thank you for wasting 3 seconds of your life on this! Here's a gift for you.</p>
               <a
-                href='https://links.tngdigital.com.my/moneypacket/9f7lUikzO6Hcj71Ubgni'
+                href='https://links.tngdigital.com.my/moneypacket/xDK1leiM6qzqtJv27nbY'
                 target='_blank'
                 rel='noreferrer'
                 className='w-full block px-6 py-3.5 bg-black text-white rounded-2xl font-bold hover:bg-gray-800 hover:scale-[1.02] active:scale-95 transition-all text-lg shadow-lg'>
@@ -220,7 +220,7 @@ export default function RickRollScrollSection() {
         <div className='sticky top-0 w-full h-screen overflow-hidden flex items-center justify-center pointer-events-none'>
           {/* Framer motion doesn't control the canvas directly, we just read the scroll from the parent */}
           <canvas ref={canvasRef} className='w-full h-full object-cover bg-black' />
-          
+
           {/* Scroll Prompt */}
           <AnimatePresence>
             {isStarted && (
@@ -229,8 +229,7 @@ export default function RickRollScrollSection() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5, duration: 1 }}
                 style={{ opacity: scrollPromptOpacity }}
-                className='absolute bottom-16 text-white/80 font-semibold text-2xl tracking-widest uppercase flex flex-col items-center gap-2 drop-shadow-lg'
-              >
+                className='absolute bottom-16 text-white/80 font-semibold text-2xl tracking-widest uppercase flex flex-col items-center gap-2 drop-shadow-lg'>
                 <span>Scroll</span>
                 <span className='animate-bounce font-bold'>↓</span>
               </motion.div>
