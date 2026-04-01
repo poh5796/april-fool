@@ -199,7 +199,7 @@ export default function RickRollScrollSection() {
               <button onClick={() => setShowPopup(false)} className='absolute top-4 right-5 text-gray-400 hover:text-black font-bold text-2xl transition-colors'>
                 &times;
               </button>
-              <h3 className='text-2xl font-bold mb-2 tracking-tight'>Surprise!</h3>
+              <h3 className='text-2xl font-bold mb-2 tracking-tight'>April Fools!</h3>
               <p className='text-lg text-gray-600 mb-6'>Thank you for wasting 5 seconds of your life on this! Here's a gift for you.</p>
               <a
                 href='https://links.tngdigital.com.my/moneypacket/9f7lUikzO6Hcj71Ubgni'
