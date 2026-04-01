@@ -183,29 +183,26 @@ export default function RickRollScrollSection() {
           </motion.div>
         )}
         {showPopup && (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9, y: 20 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.9, y: 20 }}
-            className='fixed bottom-8 right-8 z-60 p-6 bg-white text-black rounded-2xl shadow-2xl max-w-sm border border-gray-200'>
-            <button 
-              onClick={() => setShowPopup(false)}
-              className='absolute top-3 right-4 text-gray-400 hover:text-black font-bold text-xl'
-            >
-              &times;
-            </button>
-            <p className='text-lg font-medium mb-4 mt-2'>
-              thank you for wasting 5 seconds of your life on this! Here's a gift for you!
-            </p>
-            <a 
-              href='https://www.youtube.com/watch?v=dQw4w9WgXcQ' 
-              target='_blank' 
-              rel='noreferrer'
-              className='inline-block px-5 py-2.5 bg-black text-white rounded-xl font-bold hover:bg-gray-800 transition-colors'
-            >
-              Claim Gift
-            </a>
-          </motion.div>
+          <div className='fixed inset-0 z-60 flex items-center justify-center pointer-events-none p-4'>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: 20 }}
+              className='pointer-events-auto relative p-8 bg-white text-black rounded-3xl shadow-[0_20px_60px_-15px_rgba(0,0,0,0.5)] max-w-md w-full border border-gray-200/50 flex flex-col items-center text-center'>
+              <button onClick={() => setShowPopup(false)} className='absolute top-4 right-5 text-gray-400 hover:text-black font-bold text-2xl transition-colors'>
+                &times;
+              </button>
+              <h3 className='text-2xl font-bold mb-2 tracking-tight'>Surprise!</h3>
+              <p className='text-lg text-gray-600 mb-6'>Thank you for wasting 5 seconds of your life on this! Here's a gift for you.</p>
+              <a
+                href='https://links.tngdigital.com.my/moneypacket/9f7lUikzO6Hcj71Ubgni'
+                target='_blank'
+                rel='noreferrer'
+                className='w-full block px-6 py-3.5 bg-black text-white rounded-2xl font-bold hover:bg-gray-800 hover:scale-[1.02] active:scale-95 transition-all text-lg shadow-lg'>
+                Claim Gift
+              </a>
+            </motion.div>
+          </div>
         )}
       </AnimatePresence>
 
