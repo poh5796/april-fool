@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
-import { useScroll, motion, AnimatePresence, useMotionValueEvent } from 'framer-motion';
+import { useScroll, useSpring, motion, AnimatePresence, useMotionValueEvent } from 'framer-motion';
 
 export default function RickRollScrollSection() {
   const [isStarted, setIsStarted] = useState(false);
@@ -17,10 +17,17 @@ export default function RickRollScrollSection() {
   const currentFrameRef = useRef(-1);
   const totalFrames = 703;
 
-  // Track the scroll position relative to the 400vh container
+  // Track the scroll position relative to the container
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ['start start', 'end end']
+  });
+
+  // Limit framing scroll speed using a spring damper so it physically can't "skip" too fast
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
   });
 
   // Function to draw a specific frame to the canvas
@@ -110,8 +117,8 @@ export default function RickRollScrollSection() {
     return () => window.removeEventListener('resize', handleResize);
   }, []); // Empty dependencies ensures we only preload once
 
-  // React to framer-motion scroll updates
-  useMotionValueEvent(scrollYProgress, 'change', latest => {
+  // React to framer-motion scroll updates using the smoothed spring instead
+  useMotionValueEvent(smoothProgress, 'change', latest => {
     if (!isStarted) return; // Don't animate frames until the user enters
 
     // latest is a value from 0 to 1
@@ -207,7 +214,7 @@ export default function RickRollScrollSection() {
       </AnimatePresence>
 
       {/* Sticky Scroll Animation Container */}
-      <div ref={containerRef} className='relative w-full h-[400vh]'>
+      <div ref={containerRef} className='relative w-full' style={{ height: `${totalFrames * 1.5}vh` }}>
         <div className='sticky top-0 w-full h-screen overflow-hidden flex items-center justify-center pointer-events-none'>
           {/* Framer motion doesn't control the canvas directly, we just read the scroll from the parent */}
           <canvas ref={canvasRef} className='w-full h-full object-cover bg-black' />
